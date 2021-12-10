@@ -2,12 +2,45 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Keycloak Example</title>
+		<title>Lire notes</title>
 	</head>
 	<body>
 		<h1>Les notes de maths</h1>
-		<% for (var i = 0; i < noteMaths.length; i++) { %>
-		<p><%= noteMaths[i] %></p>
-		<% } %>
+		<table>
+			<tr>
+				<th>Prénom étudiant</th>
+				<th>Note de maths semestre 9</th>
+			</tr>
+			<% for (let [key,value] of noteMaths) { %>
+				<tr>
+					<td><%= key %></td>
+					<td><%= value %></td>
+				</tr>
+			<% } %>
+		</table>
+		<button><a href="/">Retour</a></button>
+		<button><a href="/note-maths/ecrire">Ajouter note</a></button>
+		<button><a href="">Valider note</a></button>
 	</body>
 </html>
+
+<style>
+	table {
+		border-collapse: collapse;
+		width: 90%;
+	}
+	th, td {
+		border: 1px solid black;
+		width: 20%;
+	}
+	th {
+		background-color: #F5F5F5;
+	}
+	td {
+		text-align: center;
+		background-color: white;
+	}
+	html {
+		background-color: #fffbea;
+	}
+</style>

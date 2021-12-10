@@ -67,17 +67,17 @@ app.get('/note-maths/lire', keycloak.enforcer(['note_maths:lire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
     res.render('lireNotesMaths', {
-        notesMaths : MathsHelper.getNotesMaths()
+        noteMaths : MathsHelper.getNotesMaths()
     });
 });
 
-app.post('/note-maths/ecrire', keycloak.enforcer(['note_maths:ecrire'], {
+app.get('/note-maths/ecrire', keycloak.enforcer(['note_maths:ecrire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('ajouterNotesMaths');
 });
 
-app.post('/note-maths/valider', keycloak.enforcer(['note_maths:valider'], {
+app.get('/note-maths/valider', keycloak.enforcer(['note_maths:valider'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
     return res.status(200).end('success');

@@ -2,17 +2,15 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Keycloak Example</title>
+		<title>Accueil</title>
 	</head>
 	<body>
-		<h1>Home</h1>
+		<h1>Accueil</h1>
 		<%
 		try {
 			if (user) {
 		%>
-				<p>Welcome <%= user.name %></p>
-				<p>Your email is: <%= user.email %></p>
-				<p>Your username is: <%= user.username %></p>
+				<p>Vous êtes connectés en tant que : <b> <%= user.username %> </b></p>
 			<% } else { %>
 				<p>User not found</p>
 			<% } %>
@@ -24,4 +22,9 @@
 				<p>Some error occurred</p>
 		<% } %>
 	</body>
+<style>
+	html {
+		background-color: #fffbea;
+	}
+</style>
 </html>

@@ -28,7 +28,7 @@ function validerNotesMaths() {
  * @returns Les notes de maths
  */
 function getNotesMaths() {
-    return noteMaths;
+    return NoteMathsmap;
 }
 
 exports.getNotesMaths = getNotesMaths;
