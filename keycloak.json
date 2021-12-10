@@ -1,0 +1,12 @@
+{
+  "realm": "universite",
+  "auth-server-url": "http://localhost:8080/auth/",
+  "ssl-required": "external",
+  "resource": "universite-app",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "b65301af-2f44-4bdb-9e0a-d868af8e7e2d"
+  },
+  "confidential-port": 0,
+  "policy-enforcer": {}
+}
