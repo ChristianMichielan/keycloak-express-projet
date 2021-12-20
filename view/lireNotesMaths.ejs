@@ -3,24 +3,56 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Lire notes</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 	</head>
 	<body>
-		<h1>Les notes de maths</h1>
-		<table>
-			<tr>
-				<th>Prénom étudiant</th>
-				<th>Note de maths semestre 9</th>
-			</tr>
-			<% for (let [key,value] of noteMaths) { %>
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+		  
+			  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			  </a>
+			</div>
+		  
+			<div id="navbarBasicExample" class="navbar-menu">
+			  <div class="navbar-start">
+				<a class="navbar-item">
+				  Accueil
+				</a>
+			  </div>
+		  
+			  <div class="navbar-end">
+				<div class="navbar-item">
+				  <div class="buttons">
+					<a class="button is-primary" href="/logout">
+					  <strong>Se deconnecter</strong>
+					</a>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </nav>
+		<div class="content">
+			<h1 class="title is-3">Les notes de maths</h1>
+			<table>
 				<tr>
-					<td><%= key %></td>
-					<td><%= value %></td>
+					<th>Prénom étudiant</th>
+					<th>Note de maths semestre 9</th>
 				</tr>
-			<% } %>
-		</table>
-		<button><a href="/">Retour</a></button>
-		<button><a href="/note-maths/ecrire">Ajouter note</a></button>
-		<button><a href="">Valider note</a></button>
+				<% for (let [key,value] of noteMaths) { %>
+					<tr>
+						<td><%= key %></td>
+						<td><%= value %></td>
+					</tr>
+				<% } %>
+			</table>
+			<p>Statut des notes de maths : <%= statutNoteMaths %></p>
+			<button><a href="/">Retour</a></button>
+			<button><a href="/note-maths/ecrire">Ajouter note</a></button>
+			<button><a href="/note-maths/valider">Valider note</a></button>
+		</div>	
 	</body>
 </html>
 
@@ -41,6 +73,10 @@
 		background-color: white;
 	}
 	html {
-		background-color: #fffbea;
+		background-color: #FAFAFA;
+	}
+	.content {
+		margin-left: 30px;
+		margin-top: 10px;
 	}
 </style>

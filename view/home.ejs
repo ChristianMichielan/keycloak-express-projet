@@ -2,29 +2,66 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 		<title>Accueil</title>
 	</head>
 	<body>
-		<h1>Accueil</h1>
-		<%
-		try {
-			if (user) {
-		%>
-				<p>Vous êtes connectés en tant que : <b> <%= user.username %> </b></p>
-			<% } else { %>
-				<p>User not found</p>
-			<% } %>
-			<a href="/note-maths/lire">Note de maths</a>
-		<%
-		} catch (e) {
-			console.error('Error: ', e);
+		<nav class="navbar" role="navigation" aria-label="main navigation">
+			<div class="navbar-brand">
+		  
+			  <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			  </a>
+			</div>
+		  
+			<div id="navbarBasicExample" class="navbar-menu">
+			  <div class="navbar-start">
+				<a class="navbar-item">
+				  Accueil
+				</a>
+			  </div>
+		  
+			  <div class="navbar-end">
+				<div class="navbar-item">
+				  <div class="buttons">
+					<a class="button is-primary" href="/logout">
+					  <strong>Se deconnecter</strong>
+					</a>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		  </nav>
+		<div class="content">
+			<h1 class="title is-3">Accueil</h1>
+			<%
+			try {
+				if (user) {
 			%>
-				<p>Some error occurred</p>
-		<% } %>
+					<p>Vous êtes connectés en tant que : <b> <%= user.username %> </b></p>
+					<p>Quels notes souhaitez vous administrer ? :</p>
+				<% } else { %>
+					<p>User not found</p>
+				<% } %>
+				<br>
+				<a href="/note-maths/lire"><button class="button is-primary">Notes de maths</button></a>
+			<%
+			} catch (e) {
+				console.error('Error: ', e);
+				%>
+					<p>Some error occurred</p>
+			<% } %>
+		</div>
 	</body>
 <style>
 	html {
-		background-color: #fffbea;
+		background-color: #FAFAFA;
+	}
+	.content {
+		margin-left: 30px;
+		margin-top: 10px;
 	}
 </style>
 </html>

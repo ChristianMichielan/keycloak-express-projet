@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <title>Ajouter note</title>
+    <title>Valider note</title>
 </head>
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -37,20 +37,12 @@
         </div>
       </nav>
     <div class="content">
-        <h1 class="title is-3">Saisir une note</h2>
-            <form method="post" action="/add-note-maths">
-                <label for="prenom">Prénom : </label>
-                <input type="text" id="prenom" name="prenom" required>
-                <br>
-                <br>
-                <label for="note">Note : </label>
-                <input type="text" id="note" name="note" required>
-                <br>
-                <br>
-                <button><a href="/note-maths/lire">Retour</a></button>
-                <button type="submit" style="margin-top: 5px;">Enregistrer</button>
-            </form>
-    </div> 
+        <h2>Voulez vous valider les notes de maths ?</h2>
+        <form method="post" action="/valider-note-maths">
+            <button><a href="/note-maths/lire">Retour</a></button>
+            <button type="submit" style="margin-top: 5px;">Valider</button>
+        </form>
+    </div>
 </body>
 </html>
 
@@ -59,7 +51,7 @@
         background-color: #FAFAFA;
     }
     .content {
-        margin-left : 30px;
+        margin-left: 30px;
         margin-top: 10px;
     }
 </style>

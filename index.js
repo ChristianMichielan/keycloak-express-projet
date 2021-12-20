@@ -3,10 +3,12 @@ const express = require('express');
 const session = require('express-session');
 const favicon = require('serve-favicon');
 const Keycloak = require('keycloak-connect');
+var bodyParser = require('body-parser');
 const MathsHelper = require('./metier/maths');
 
 const app = express();
 const memoryStore = new session.MemoryStore();
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.set('view engine', 'ejs');
 app.set('views', require('path').join(__dirname, '/view'));
@@ -67,7 +69,8 @@ app.get('/note-maths/lire', keycloak.enforcer(['note_maths:lire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
     res.render('lireNotesMaths', {
-        noteMaths : MathsHelper.getNotesMaths()
+        noteMaths : MathsHelper.getNotesMaths(),
+        statutNoteMaths : MathsHelper.getStatusNotesMaths()
     });
 });
 
@@ -80,8 +83,23 @@ app.get('/note-maths/ecrire', keycloak.enforcer(['note_maths:ecrire'], {
 app.get('/note-maths/valider', keycloak.enforcer(['note_maths:valider'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('validerNotesMaths');
 });
+
+app.post('/add-note-maths', urlencodedParser, (req, res) => {
+    console.log(req.body.prenom);
+    var prenom = req.body.prenom;
+    var note = req.body.note;
+    MathsHelper.ajouterNoteMaths(prenom,note);
+    res.redirect('/');
+});
+
+app.post('/valider-note-maths', urlencodedParser, (req, res) => {
+    console.log("OK");
+    MathsHelper.validerNotesMaths();
+    res.redirect('/');
+});
+
 
 // INFORMATIQUE
 
