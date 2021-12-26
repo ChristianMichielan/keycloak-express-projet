@@ -1,17 +1,53 @@
-app.get('/note-informatique-lire', keycloak.enforcer(['note_informatique:lire'], {
-    resource_server_id: 'universite-app'
-}), (req, res) => {
-    return res.status(200).end('success');
-});
+let valider = false;
+const NoteInfomap = new Map();
 
-app.post('/note-informatique-ecrire', keycloak.enforcer(['note_informatique:ecrire'], {
-    resource_server_id: 'universite-app'
-}), (req, res) => {
-    return res.status(200).end('success');
-});
+// Initialisation des données 
 
-app.post('/note-informatique-valider', keycloak.enforcer(['note_informatique:valider'], {
-    resource_server_id: 'universite-app'
-}), (req, res) => {
-    return res.status(200).end('success');
-});
+NoteInfomap.set('Christian', '13');
+NoteInfomap.set('Quentin', '15');
+NoteInfomap.set('Bernard', '8');
+
+/**
+ * Ajouter une note d'informatique
+ * @param note 
+ */
+function ajouterNoteInfo(prenom,note) {
+    NoteInfomap.set(prenom,note);
+}
+
+/**
+ * Permet de valider les notes d'informatique
+ */
+function validerNotesInfo() {
+    this.valider = true;
+}
+
+/**
+ * Obtenir les notes d'informatique
+ * @returns Les notes d'informatique
+ */
+function getNotesInfo() {
+    return NoteInfomap;
+}
+
+/**
+ * Obtenir le status des notes d'informatique
+ * @returns 
+ */
+function getStatusNotesInfo() {
+    let statut;
+    if (!this.valider) {
+        statut = 'Non validés';
+    }
+    console.log(this.valider);
+    if (this.valider) {
+        console.log(valider);
+        statut = 'Validés';
+    }
+    return statut;
+}
+
+exports.getNotesInfo = getNotesInfo;
+exports.getStatusNotesInfo = getStatusNotesInfo;
+exports.validerNotesInfo = validerNotesInfo;
+exports.ajouterNoteInfo = ajouterNoteInfo;

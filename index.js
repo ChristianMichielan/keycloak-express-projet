@@ -5,6 +5,8 @@ const favicon = require('serve-favicon');
 const Keycloak = require('keycloak-connect');
 var bodyParser = require('body-parser');
 const MathsHelper = require('./metier/maths');
+const AnglaisHelper = require('./metier/anglais');
+const InformatiqueHelper = require('./metier/informatique');
 
 const app = express();
 const memoryStore = new session.MemoryStore();
@@ -106,40 +108,73 @@ app.post('/valider-note-maths', urlencodedParser, (req, res) => {
 app.get('/note-informatique/lire', keycloak.enforcer(['note_informatique:lire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('lireNotesInformatique', {
+        noteInformatique : InformatiqueHelper.getNotesInfo(),
+        statutNoteInformatique : InformatiqueHelper.getStatusNotesInfo()
+    });
 });
 
-app.post('/note-informatique/ecrire', keycloak.enforcer(['note_informatique:ecrire'], {
+app.get('/note-informatique/ecrire', keycloak.enforcer(['note_informatique:ecrire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('ajouterNotesInformatique');
 });
 
-app.post('/note-informatique/valider', keycloak.enforcer(['note_informatique:valider'], {
+app.get('/note-informatique/valider', keycloak.enforcer(['note_informatique:valider'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('validerNotesInformatique');
 });
 
+app.post('/add-note-informatique', urlencodedParser, (req, res) => {
+    console.log(req.body.prenom);
+    var prenom = req.body.prenom;
+    var note = req.body.note;
+    InformatiqueHelper.ajouterNoteInfo(prenom,note);
+    res.redirect('/');
+});
+
+app.post('/valider-note-informatique', urlencodedParser, (req, res) => {
+    console.log("OK");
+    InformatiqueHelper.validerNotesInfo();
+    res.redirect('/');
+});
 
 // ANGLAIS 
 
 app.get('/note-anglais/lire', keycloak.enforcer(['note_anglais:lire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.render(lire)
+    res.render('lireNotesAnglais', {
+        noteAnglais : AnglaisHelper.getNotesAnglais(),
+        statutNoteAnglais : AnglaisHelper.getStatusNotesAnglais()
+    });
 });
 
-app.post('/note-anglais/ecrire', keycloak.enforcer(['note_anglais:ecrire'], {
+app.get('/note-anglais/ecrire', keycloak.enforcer(['note_anglais:ecrire'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('ajouterNotesAnglais');
 });
 
-app.post('/note-anglais/valider', keycloak.enforcer(['note_anglais:valider'], {
+app.get('/note-anglais/valider', keycloak.enforcer(['note_anglais:valider'], {
     resource_server_id: 'universite-app'
 }), (req, res) => {
-    return res.status(200).end('success');
+    res.render('validerNotesAnglais');
+});
+
+app.post('/add-note-anglais', urlencodedParser, (req, res) => {
+    console.log(req.body.prenom);
+    var prenom = req.body.prenom;
+    var note = req.body.note;
+    AnglaisHelper.ajouterNoteAnglais(prenom,note);
+    res.redirect('/');
+});
+
+app.post('/valider-note-anglais', urlencodedParser, (req, res) => {
+    console.log("OK");
+    AnglaisHelper.validerNotesAnglais();
+    res.redirect('/');
 });
 
 // CAS ERREUR
